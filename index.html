@@ -208,7 +208,8 @@ section { position: relative; z-index: 10; }
   background: #FFFFFF;
   padding: 16px 16px 0;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
+  width: 100%;
 }
 #hero::before {
   content: '';
@@ -225,6 +226,7 @@ section { position: relative; z-index: 10; }
   text-align: center;
   position: relative;
   overflow: hidden;
+  width: 100%;
   box-shadow: 0 2px 40px rgba(100,80,220,.10), 0 1px 0 rgba(255,255,255,.6) inset;
   border: 1px solid rgba(255,255,255,.7);
   min-height: 85vh;
@@ -1028,21 +1030,245 @@ footer {
 }
 
 /* ── RESPONSIVE ── */
+
+/* ── TABLET ── */
 @media(max-width:900px) {
-  nav { padding: 0 20px; }
-  .container { padding: 0 22px; }
-  nav .nav-center { display: none; }
-  #hero, #about, #work, #testimonials, #contact { padding-top: 80px; padding-bottom: 80px; }
+  .container { padding: 0 24px; }
+  section.section { padding: 72px 0; }
+
+  /* Nav */
+  nav { padding: 0 12px 0 16px; height: 50px; }
+  .nav-center { display: none; }
+  .logo-name { font-size: 14px; }
+  .btn-nav-cta { padding: 5px 16px 5px 5px; font-size: 12px; }
+  .btn-nav-cta .nav-cta-arrow { width: 28px; height: 28px; font-size: 12px; }
+
+  /* Hero */
+  #hero { padding: 14px 14px 0; }
+  .hero-card { border-radius: 22px; padding: 12px 18px 0; }
+  .hero-inner { padding-top: 28px; }
+  .hero-headline { font-size: clamp(36px, 7.5vw, 60px); letter-spacing: -2px; }
+  .hero-sub { font-size: clamp(36px, 7.5vw, 60px); letter-spacing: -2px; }
+  .hero-desc { font-size: 14px; max-width: 100%; margin-bottom: 32px; }
+  .hero-btns { flex-direction: column; align-items: center; gap: 10px; margin-bottom: 40px; }
+  .btn-filled, .btn-outline { width: 100%; max-width: 300px; justify-content: center; padding: 12px 28px 12px 12px; font-size: 14px; }
+  .btn-filled .btn-arrow, .btn-outline .btn-arrow { width: 30px; height: 30px; }
+  .hero-eyebrow { font-size: 10px; padding: 5px 12px; margin-bottom: 24px; }
+  .hero-badge-float { display: none; }
+  .hero-tw-line { font-size: 12px; }
+  #tw { min-width: 160px; }
+
+  /* Peek */
+  .hero-bottom-peek { max-width: 100%; margin: 36px 0 0; padding: 14px 14px 0; }
+  .peek-grid { gap: 1px; }
+  .peek-item { padding: 12px 8px; font-size: 11px; }
+  .peek-icon { font-size: 18px; }
+
+  /* About */
+  #about { padding: 72px 0; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
-  .stats-row { flex-direction: column; gap: 12px; }
-  .stat { margin: 0; }
-  .pgrid { grid-template-columns: 1fr 1fr; }
-  .tgrid { grid-template-columns: 1fr; }
-  footer { padding: 20px 22px; flex-direction: column; gap: 8px; text-align: center; }
-  .work-header { flex-direction: column; align-items: flex-start; }
-  .stats-row { gap: 24px; flex-wrap: wrap; }
+  .about-title { font-size: clamp(28px, 5.5vw, 44px); }
+  .about-desc { font-size: 14px; }
+  .stats-row { flex-wrap: wrap; gap: 10px; margin: 0; flex-direction: row; }
+  .stat { flex: 1; min-width: 130px; margin: 0; padding: 20px 16px; border-radius: 16px; }
+  .stat-n { font-size: 38px; }
+  .stat-n b { font-size: 22px; }
+  .stat-l { font-size: 11px; margin-top: 6px; }
+  .skills-glass { padding: 28px 22px; }
+
+  /* Work */
+  #work { padding: 72px 0; }
+  .work-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .work-header > div:last-child { flex-wrap: wrap; gap: 10px; }
+  .pgrid { grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* Testimonials */
+  #testimonials { padding: 72px 0; }
+  .tgrid { grid-template-columns: 1fr; gap: 12px; }
+
+  /* Contact */
+  #contact { padding: 80px 0; }
+  .contact-inner { padding: 0 28px; }
+  .contact-title { font-size: clamp(32px, 6.5vw, 56px); letter-spacing: -2px; }
+  .contact-sub { font-size: 14px; }
+  .wa-btn { padding: 14px 32px; font-size: 15px; }
+
+  /* Footer */
+  footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+
+  /* All Works */
+  .aw-header { padding: 14px 18px; flex-wrap: wrap; gap: 10px; }
+  .aw-filters { display: none; }
+  .aw-body { padding: 18px; }
+  .aw-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .aw-sec-label { font-size: 13px; }
 }
-@media(max-width:540px) { .pgrid { grid-template-columns: 1fr; } }
+
+/* ── MOBILE ── */
+@media(max-width:480px) {
+  .container { padding: 0 16px; }
+  section.section { padding: 56px 0; }
+
+  /* Nav — compact transparent inside hero card */
+  nav {
+    padding: 0 8px 0 10px;
+    height: 46px;
+  }
+  .logo-svg { width: 28px; height: 28px; }
+  .logo-name { font-size: 13px; }
+  .nav-cta-arrow { width: 26px !important; height: 26px !important; font-size: 11px !important; }
+  .btn-nav-cta { padding: 4px 12px 4px 4px; font-size: 11px; gap: 0; }
+
+  /* Hero card — full edge to edge with small margin */
+  #hero { padding: 10px 10px 0; overflow: hidden; }
+  .hero-card {
+    border-radius: 18px;
+    padding: 10px 14px 0;
+    min-height: auto;
+    overflow: hidden;
+  }
+  .hero-inner { padding-top: 20px; text-align: center; }
+
+  /* Headline fix — was overflowing */
+  .hero-headline {
+    font-size: clamp(30px, 8.5vw, 48px);
+    letter-spacing: -1.5px;
+    line-height: 1.05;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  .hero-sub {
+    font-size: clamp(30px, 8.5vw, 48px);
+    letter-spacing: -1.5px;
+    line-height: 1.05;
+    word-break: keep-all;
+  }
+  .gradient-word { display: inline; }
+
+  .hero-eyebrow { font-size: 10px; padding: 5px 12px; margin-bottom: 20px; }
+  .hero-tw-line { font-size: 11px; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 20px; }
+  #tw { min-width: 120px; font-size: 11px; font-size: 10px; }
+
+  .hero-desc { font-size: 13px; margin-bottom: 24px; padding: 0 4px; line-height: 1.7; }
+
+  /* Buttons — full width pill, correct proportions */
+  .hero-btns { flex-direction: column; align-items: center; gap: 10px; margin-bottom: 28px; }
+  .btn-filled, .btn-outline {
+    width: 100%; max-width: 260px;
+    justify-content: center;
+    padding: 11px 22px 11px 11px;
+    font-size: 13px;
+    border-radius: 50px;
+  }
+  .btn-filled .btn-arrow, .btn-outline .btn-arrow {
+    width: 28px; height: 28px; font-size: 12px;
+    margin-left: 10px;
+  }
+
+  /* Peek strip */
+  .hero-bottom-peek {
+    margin: 20px 0 0;
+    padding: 12px 12px 0;
+    border-radius: 12px 12px 0 0;
+  }
+  .peek-bar { margin-bottom: 10px; }
+  .peek-grid { gap: 0; }
+  .peek-item { padding: 10px 6px; font-size: 10px; gap: 4px; }
+  .peek-icon { font-size: 16px; }
+  .peek-hide { display: none; }
+
+  /* Scroll hint */
+  .hero-scroll { bottom: 20px; }
+
+  /* About */
+  #about { padding: 56px 0; }
+  .about-tag { margin-bottom: 14px; }
+  .about-title { font-size: clamp(24px, 7vw, 34px); letter-spacing: -1px; }
+  .about-desc { font-size: 13px; line-height: 1.75; margin-bottom: 28px; }
+
+  /* Stats — side by side on mobile */
+  .stats-row { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+  .stat { flex: 1; min-width: 100px; padding: 16px 12px; border-radius: 14px; text-align: center; }
+  .stat-n { font-size: 32px; letter-spacing: -1px; justify-content: center; }
+  .stat-n b { font-size: 18px; }
+  .stat-l { font-size: 11px; margin-top: 4px; }
+
+  /* Skills */
+  .skills-glass { padding: 20px 16px; border-radius: 16px; }
+  .sk-label { font-size: 9px; letter-spacing: 2px; margin-top: 18px; margin-bottom: 10px; }
+  .tag { font-size: 11px; padding: 5px 12px; }
+
+  /* Work */
+  #work { padding: 56px 0; }
+  .work-header { gap: 14px; }
+  .sec-title { font-size: clamp(24px, 7vw, 38px); letter-spacing: -1.5px; }
+  .pgrid { grid-template-columns: 1fr; gap: 10px; }
+  .tabs-pill { padding: 3px; }
+  .tab { padding: 7px 16px; font-size: 12px; }
+  .btn-view-all { font-size: 11px; padding: 7px 14px; }
+  .pcard-title { font-size: 13px; }
+  .pcard-cat { font-size: 9px; }
+
+  /* Testimonials */
+  #testimonials { padding: 56px 0; }
+  .tcard { padding: 22px 18px; border-radius: 16px; }
+  .t-text { font-size: 13px; }
+  .t-stars { font-size: 11px; }
+  .t-name { font-size: 13px; }
+
+  /* Contact */
+  #contact { padding: 64px 0; }
+  .contact-inner { padding: 0 20px; }
+  .contact-title { font-size: clamp(28px, 8vw, 42px); letter-spacing: -1.5px; }
+  .contact-sub { font-size: 13px; margin-bottom: 32px; }
+  .wa-btn { padding: 12px 24px; font-size: 14px; gap: 10px; }
+  .wa-btn svg { width: 17px; height: 17px; }
+  .wa-num { font-size: 11px; }
+
+  /* Lightbox */
+  .lb-nav { padding: 14px 16px; }
+  .lb-title { font-size: 14px; }
+  .lb-body { padding: 16px; }
+  .lb-footer { padding: 12px 16px; }
+  .lb-close { width: 34px; height: 34px; font-size: 15px; }
+  .lb-arrow { width: 34px; height: 34px; font-size: 14px; }
+
+  /* All Works page */
+  .aw-header { padding: 12px 14px; gap: 8px; }
+  .aw-logo { font-size: 14px; }
+  .aw-close { width: 34px; height: 34px; font-size: 14px; }
+  .aw-body { padding: 14px; }
+  .aw-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .aw-sec-header { margin-bottom: 14px; padding-bottom: 10px; }
+  .aw-sec-label { font-size: 12px; }
+  .aw-sec-count { font-size: 11px; }
+  .aw-section { margin-bottom: 36px; }
+  .aw-title { font-size: 12px; }
+  .aw-cat { font-size: 9px; }
+
+  /* Footer */
+  footer { padding: 18px 16px; flex-direction: column; gap: 8px; text-align: center; }
+  .foot-logo { font-size: 13px; justify-content: center; }
+  .foot-copy { font-size: 10px; }
+
+  /* Cursor — hide on touch devices */
+  #cur, #cur2 { display: none; }
+  body { cursor: auto; }
+
+  /* Divider */
+  .divider { margin: 0; }
+}
+
+/* ── SMALL MOBILE (360px) ── */
+@media(max-width:390px) {
+  .hero-headline { font-size: clamp(26px, 8vw, 38px); }
+  .hero-sub { font-size: clamp(26px, 8vw, 38px); }
+  .stat { min-width: 88px; padding: 14px 10px; }
+  .stat-n { font-size: 28px; }
+  .stat-n b { font-size: 16px; }
+  .aw-grid { grid-template-columns: 1fr; }
+}
+
 </style>
 </head>
 <body>
@@ -1207,22 +1433,112 @@ footer {
     </div>
 
     <div class="tabpanel on" id="tp-ux">
-      <div class="pgrid">
-        <div class="pcard r"><div class="pcard-placeholder">📱</div><div class="pcard-over"><div class="pcard-cat">Mobile App · UX/UI</div><div class="pcard-title">تطبيق تجارة إلكترونية</div></div><div class="pcard-chip">UX/UI</div></div>
-        <div class="pcard r"><div class="pcard-placeholder">💻</div><div class="pcard-over"><div class="pcard-cat">Web Design · UX/UI</div><div class="pcard-title">لوحة تحكم SaaS</div></div><div class="pcard-chip">Dashboard</div></div>
-        <div class="pcard r"><div class="pcard-placeholder">🏥</div><div class="pcard-over"><div class="pcard-cat">Healthcare · UX/UI</div><div class="pcard-title">تطبيق رعاية صحية</div></div><div class="pcard-chip">Healthcare</div></div>
-        <div class="pcard r"><div class="pcard-placeholder">🛒</div><div class="pcard-over"><div class="pcard-cat">E-commerce · UX/UI</div><div class="pcard-title">موقع متجر إلكتروني</div></div><div class="pcard-chip">E-commerce</div></div>
-        <div class="pcard r"><div class="pcard-placeholder">📊</div><div class="pcard-over"><div class="pcard-cat">Dashboard · UX/UI</div><div class="pcard-title">نظام إدارة بيانات</div></div><div class="pcard-chip">Analytics</div></div>
-        <div class="pcard r"><div class="pcard-placeholder">🎓</div><div class="pcard-over"><div class="pcard-cat">Education · UX/UI</div><div class="pcard-title">منصة تعليمية</div></div><div class="pcard-chip">EdTech</div></div>
-      </div>
+    <div class="pgrid">
+        <div class="pcard r">
+          <img class="pcard-img" src="img_1.jpg" alt="تطبيق استشارة" loading="lazy">
+          <div class="pcard-over">
+            <div class="pcard-cat">UX/UI · تطبيق طبي</div>
+            <div class="pcard-title">تطبيق استشارة</div>
+          </div>
+          <div class="pcard-chip">UX/UI</div>
+        </div>
+        <div class="pcard r">
+          <img class="pcard-img" src="img_2.jpg" alt="تطبيق مشرف" loading="lazy">
+          <div class="pcard-over">
+            <div class="pcard-cat">UX/UI · إدارة</div>
+            <div class="pcard-title">تطبيق مشرف</div>
+          </div>
+          <div class="pcard-chip">UX/UI</div>
+        </div>
+        <div class="pcard r">
+          <img class="pcard-img" src="img_3.jpg" alt="الأكاديمية المالية" loading="lazy">
+          <div class="pcard-over">
+            <div class="pcard-cat">UX/UI · موقع ويب</div>
+            <div class="pcard-title">الأكاديمية المالية</div>
+          </div>
+          <div class="pcard-chip">UX/UI</div>
+        </div>
+        <div class="pcard r">
+          <img class="pcard-img" src="img_4.jpg" alt="النهدي" loading="lazy">
+          <div class="pcard-over">
+            <div class="pcard-cat">UX/UI · تطبيق</div>
+            <div class="pcard-title">النهدي</div>
+          </div>
+          <div class="pcard-chip">UX/UI</div>
+        </div>
+        <div class="pcard r">
+          <img class="pcard-img" src="img_5.jpg" alt="طهر وعفاف" loading="lazy">
+          <div class="pcard-over">
+            <div class="pcard-cat">UX/UI · تطبيق</div>
+            <div class="pcard-title">طهر وعفاف</div>
+          </div>
+          <div class="pcard-chip">UX/UI</div>
+        </div>
+        <div class="pcard r">
+          <img class="pcard-img" src="img_6.jpg" alt="بساطة — UI Design" loading="lazy">
+          <div class="pcard-over">
+            <div class="pcard-cat">UX/UI · تطبيق طبي</div>
+            <div class="pcard-title">بساطة — UI Design</div>
+          </div>
+          <div class="pcard-chip">UX/UI</div>
+        </div>
+        <div class="pcard r">
+          <img class="pcard-img" src="img_7.jpg" alt="تطبيق حرفي" loading="lazy">
+          <div class="pcard-over">
+            <div class="pcard-cat">UX/UI · تطبيق</div>
+            <div class="pcard-title">تطبيق حرفي</div>
+          </div>
+          <div class="pcard-chip">UX/UI</div>
+        </div>
+        <div class="pcard r">
+          <img class="pcard-img" src="img_8.jpg" alt="تطبيق بوت" loading="lazy">
+          <div class="pcard-over">
+            <div class="pcard-cat">UX/UI · Chatbot</div>
+            <div class="pcard-title">تطبيق بوت</div>
+          </div>
+          <div class="pcard-chip">UX/UI</div>
+        </div>
+        <div class="pcard r">
+          <img class="pcard-img" src="img_9.jpg" alt="New Source" loading="lazy">
+          <div class="pcard-over">
+            <div class="pcard-cat">UX/UI · تطبيق مالي</div>
+            <div class="pcard-title">New Source</div>
+          </div>
+          <div class="pcard-chip">UX/UI</div>
+        </div>
+        <div class="pcard r">
+          <img class="pcard-img" src="img_10.jpg" alt="جدارة" loading="lazy">
+          <div class="pcard-over">
+            <div class="pcard-cat">UX/UI · تطبيق</div>
+            <div class="pcard-title">جدارة</div>
+          </div>
+          <div class="pcard-chip">UX/UI</div>
+        </div>
+        <div class="pcard r">
+          <img class="pcard-img" src="img_11.jpg" alt="Basata Website" loading="lazy">
+          <div class="pcard-over">
+            <div class="pcard-cat">UX/UI · موقع ويب</div>
+            <div class="pcard-title">Basata Website</div>
+          </div>
+          <div class="pcard-chip">UX/UI</div>
+        </div>
+        <div class="pcard r">
+          <img class="pcard-img" src="img_12.jpg" alt="Visualsoft Website" loading="lazy">
+          <div class="pcard-over">
+            <div class="pcard-cat">UX/UI · موقع ويب</div>
+            <div class="pcard-title">Visualsoft Website</div>
+          </div>
+          <div class="pcard-chip">UX/UI</div>
+        </div>
     </div>
+  </div>
 
     <div class="tabpanel" id="tp-gr">
       <div class="pgrid">
-        <div class="pcard r"><img class="pcard-img" src="img_1.png" alt="عيد مبارك"><div class="pcard-over"><div class="pcard-cat">Social Media · Graphic</div><div class="pcard-title">بوستر عيد مبارك</div></div><div class="pcard-chip">Social Media</div></div>
-        <div class="pcard r"><img class="pcard-img" src="img_2.png" alt="المدارس"><div class="pcard-over"><div class="pcard-cat">Social Media · Graphic</div><div class="pcard-title">حملة العودة للمدارس</div></div><div class="pcard-chip">Campaign</div></div>
-        <div class="pcard r"><img class="pcard-img" src="img_3.png" alt="بوستات"><div class="pcard-over"><div class="pcard-cat">Social Media · Graphic</div><div class="pcard-title">بوستات سوشيال ميديا</div></div><div class="pcard-chip">Social</div></div>
-        <div class="pcard r"><img class="pcard-img" src="img_4.png" alt="packaging"><div class="pcard-over"><div class="pcard-cat">Packaging · Graphic</div><div class="pcard-title">تغليف LOR Dishwashing</div></div><div class="pcard-chip">Packaging</div></div>
+        <div class="pcard r"><img class="pcard-img" src="img_13.png" alt="عيد مبارك"><div class="pcard-over"><div class="pcard-cat">Social Media · Graphic</div><div class="pcard-title">بوستر عيد مبارك</div></div><div class="pcard-chip">Social Media</div></div>
+        <div class="pcard r"><img class="pcard-img" src="img_14.png" alt="المدارس"><div class="pcard-over"><div class="pcard-cat">Social Media · Graphic</div><div class="pcard-title">حملة العودة للمدارس</div></div><div class="pcard-chip">Campaign</div></div>
+        <div class="pcard r"><img class="pcard-img" src="img_15.png" alt="بوستات"><div class="pcard-over"><div class="pcard-cat">Social Media · Graphic</div><div class="pcard-title">بوستات سوشيال ميديا</div></div><div class="pcard-chip">Social</div></div>
+        <div class="pcard r"><img class="pcard-img" src="img_16.png" alt="packaging"><div class="pcard-over"><div class="pcard-cat">Packaging · Graphic</div><div class="pcard-title">تغليف LOR Dishwashing</div></div><div class="pcard-chip">Packaging</div></div>
         <div class="pcard r"><div class="pcard-placeholder">🎨</div><div class="pcard-over"><div class="pcard-cat">Brand Identity</div><div class="pcard-title">هوية بصرية متكاملة</div></div><div class="pcard-chip">Branding</div></div>
         <div class="pcard r"><div class="pcard-placeholder">🏷️</div><div class="pcard-over"><div class="pcard-cat">Logo Design</div><div class="pcard-title">تصاميم شعارات</div></div><div class="pcard-chip">Logo</div></div>
       </div>
@@ -1315,21 +1631,19 @@ footer {
         <span class="aw-sec-count" id="ux-count"></span>
       </div>
       <div class="aw-inner-grid aw-grid">
-      <div class="aw-card" data-cat="ux"><div class="aw-card-ph">📱</div><div class="aw-over"><div class="aw-cat">Mobile App · UX/UI</div><div class="aw-title">تطبيق تجارة إلكترونية</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><div class="aw-card-ph">💻</div><div class="aw-over"><div class="aw-cat">Web Design · UX/UI</div><div class="aw-title">لوحة تحكم SaaS</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><div class="aw-card-ph">🏥</div><div class="aw-over"><div class="aw-cat">Healthcare · UX/UI</div><div class="aw-title">تطبيق رعاية صحية</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><div class="aw-card-ph">🛒</div><div class="aw-over"><div class="aw-cat">E-commerce · UX/UI</div><div class="aw-title">موقع متجر إلكتروني</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><div class="aw-card-ph">📊</div><div class="aw-over"><div class="aw-cat">Dashboard · UX/UI</div><div class="aw-title">نظام إدارة بيانات</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><div class="aw-card-ph">🎓</div><div class="aw-over"><div class="aw-cat">Education · UX/UI</div><div class="aw-title">منصة تعليمية</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><div class="aw-card-ph">🏦</div><div class="aw-over"><div class="aw-cat">Fintech · UX/UI</div><div class="aw-title">تطبيق بنكي</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><div class="aw-card-ph">✈️</div><div class="aw-over"><div class="aw-cat">Travel · UX/UI</div><div class="aw-title">تطبيق سفر</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><div class="aw-card-ph">🍽️</div><div class="aw-over"><div class="aw-cat">F&B · UX/UI</div><div class="aw-title">تطبيق مطعم</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><div class="aw-card-ph">🎵</div><div class="aw-over"><div class="aw-cat">Entertainment · UX/UI</div><div class="aw-title">تطبيق موسيقى</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><div class="aw-card-ph">💊</div><div class="aw-over"><div class="aw-cat">Health · UX/UI</div><div class="aw-title">تطبيق صيدلية</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><div class="aw-card-ph">🏋️</div><div class="aw-over"><div class="aw-cat">Sport · UX/UI</div><div class="aw-title">تطبيق رياضة</div></div><div class="aw-tag">UX/UI</div></div>
-
-      
-</div></div><!-- /ux section -->
+<div class="aw-card" data-cat="ux"><img src="img_1.jpg" alt="تطبيق استشارة" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق طبي</div><div class="aw-title">تطبيق استشارة</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><img src="img_2.jpg" alt="تطبيق مشرف" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · إدارة</div><div class="aw-title">تطبيق مشرف</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><img src="img_3.jpg" alt="الأكاديمية المالية" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · موقع ويب</div><div class="aw-title">الأكاديمية المالية</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><img src="img_4.jpg" alt="النهدي" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق</div><div class="aw-title">النهدي</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><img src="img_5.jpg" alt="طهر وعفاف" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق</div><div class="aw-title">طهر وعفاف</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><img src="img_6.jpg" alt="بساطة — UI Design" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق طبي</div><div class="aw-title">بساطة — UI Design</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><img src="img_7.jpg" alt="تطبيق حرفي" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق</div><div class="aw-title">تطبيق حرفي</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><img src="img_8.jpg" alt="تطبيق بوت" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · Chatbot</div><div class="aw-title">تطبيق بوت</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><img src="img_9.jpg" alt="New Source" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق مالي</div><div class="aw-title">New Source</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><img src="img_10.jpg" alt="جدارة" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق</div><div class="aw-title">جدارة</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><img src="img_11.jpg" alt="Basata Website" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · موقع ويب</div><div class="aw-title">Basata Website</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><img src="img_12.jpg" alt="Visualsoft Website" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · موقع ويب</div><div class="aw-title">Visualsoft Website</div></div><div class="aw-tag">UX/UI</div></div>
+      </div></div><!-- /ux section -->
     <!-- Graphic Section -->
     <div class="aw-section" id="aw-sec-gr" data-sec="gr">
       <div class="aw-sec-header">
@@ -1337,10 +1651,10 @@ footer {
         <span class="aw-sec-count" id="gr-count"></span>
       </div>
       <div class="aw-inner-grid aw-grid">
-<div class="aw-card" data-cat="gr"><img src="img_1.png" alt="عيد مبارك"><div class="aw-over"><div class="aw-cat">Social Media · Graphic</div><div class="aw-title">بوستر عيد مبارك</div></div><div class="aw-tag">Social</div></div>
-<div class="aw-card" data-cat="gr"><img src="img_2.png" alt="المدارس"><div class="aw-over"><div class="aw-cat">Social Media · Graphic</div><div class="aw-title">حملة العودة للمدارس</div></div><div class="aw-tag">Campaign</div></div>
-<div class="aw-card" data-cat="gr"><img src="img_3.png" alt="بوستات"><div class="aw-over"><div class="aw-cat">Social Media · Graphic</div><div class="aw-title">بوستات سوشيال ميديا</div></div><div class="aw-tag">Social</div></div>
-<div class="aw-card" data-cat="gr"><img src="img_4.png" alt="packaging"><div class="aw-over"><div class="aw-cat">Packaging · Graphic</div><div class="aw-title">تغليف LOR Dishwashing</div></div><div class="aw-tag">Packaging</div></div>
+<div class="aw-card" data-cat="gr"><img src="img_13.png" alt="عيد مبارك"><div class="aw-over"><div class="aw-cat">Social Media · Graphic</div><div class="aw-title">بوستر عيد مبارك</div></div><div class="aw-tag">Social</div></div>
+<div class="aw-card" data-cat="gr"><img src="img_14.png" alt="المدارس"><div class="aw-over"><div class="aw-cat">Social Media · Graphic</div><div class="aw-title">حملة العودة للمدارس</div></div><div class="aw-tag">Campaign</div></div>
+<div class="aw-card" data-cat="gr"><img src="img_15.png" alt="بوستات"><div class="aw-over"><div class="aw-cat">Social Media · Graphic</div><div class="aw-title">بوستات سوشيال ميديا</div></div><div class="aw-tag">Social</div></div>
+<div class="aw-card" data-cat="gr"><img src="img_16.png" alt="packaging"><div class="aw-over"><div class="aw-cat">Packaging · Graphic</div><div class="aw-title">تغليف LOR Dishwashing</div></div><div class="aw-tag">Packaging</div></div>
 <div class="aw-card" data-cat="gr"><div class="aw-card-ph">🎨</div><div class="aw-over"><div class="aw-cat">Brand Identity</div><div class="aw-title">هوية بصرية متكاملة</div></div><div class="aw-tag">Branding</div></div>
 <div class="aw-card" data-cat="gr"><div class="aw-card-ph">🏷️</div><div class="aw-over"><div class="aw-cat">Logo Design</div><div class="aw-title">تصاميم شعارات</div></div><div class="aw-tag">Logo</div></div>
 <div class="aw-card" data-cat="gr"><div class="aw-card-ph">📄</div><div class="aw-over"><div class="aw-cat">Print Design</div><div class="aw-title">تصاميم مطبوعات</div></div><div class="aw-tag">Print</div></div>
@@ -1671,9 +1985,10 @@ window.addEventListener('scroll',()=>{
   navLinks.forEach(l=>{
     l.classList.toggle('active',l.getAttribute('href')==='#'+cur2Sec);
   });
-  // Once past hero, give nav a floating glass look
+  // Once past hero, give nav a floating glass look (desktop only)
   const heroH = document.getElementById('hero')?.offsetHeight || 600;
-  if(navEl){
+  const isMobile = window.innerWidth < 768;
+  if(navEl && !isMobile){
     if(window.scrollY > heroH - 80){
       navEl.style.position='fixed';
       navEl.style.top='14px';
@@ -1699,7 +2014,7 @@ window.addEventListener('scroll',()=>{
       navEl.style.backdropFilter='none';
       navEl.style.border='none';
       navEl.style.borderRadius='';
-      navEl.style.padding='0 8px 0 4px';
+      navEl.style.padding='0 16px 0 16px';
       navEl.style.boxShadow='none';
     }
   }
