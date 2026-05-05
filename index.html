@@ -553,27 +553,41 @@ section { position: relative; z-index: 10; }
 
 .pgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
 .pcard {
-  border-radius: 16px; overflow: hidden;
-  position: relative; cursor: pointer;
-  aspect-ratio: 4/3;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  height: 280px;
   background: #1A1A1E;
   border: 1px solid rgba(255,255,255,.07);
-  transform-style: preserve-3d; will-change: transform;
+  transform-style: preserve-3d;
+  will-change: transform;
   transition: box-shadow .4s cubic-bezier(0.23,1,.32,1), border-color .4s;
 }
 .pcard:hover {
   box-shadow: 0 24px 64px rgba(124,92,252,.14);
   border-color: rgba(124,92,252,.25);
 }
-.pcard-img { width:100%; height:100%; object-fit:cover; display:block; transition: transform .6s cubic-bezier(0.23,1,.32,1); }
-.pcard:hover .pcard-img { transform: scale(1.04); }
-.pcard-placeholder {
-  width:100%; height:100%; display:flex; align-items:center; justify-content:center;
-  font-size:40px;
-  background: rgba(255,255,255,.03);
-  transition: transform .6s cubic-bezier(0.23,1,.32,1);
+/* Image wrapper — scrolls from top to bottom on hover */
+.pcard-img-wrap {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: auto;
+  transform: translateY(0);
+  transition: transform 2.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
 }
-.pcard:hover .pcard-placeholder { transform: scale(1.04); }
+.pcard-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.pcard-placeholder {
+  width: 100%; height: 280px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px; background: rgba(255,255,255,.03);
+}
+
 .pcard-over {
   position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(0,0,0,.85) 0%, transparent 55%);
@@ -874,7 +888,7 @@ footer {
 .aw-card {
   border-radius: 14px; overflow: hidden;
   position: relative; cursor: pointer;
-  aspect-ratio: 4/3;
+  height: 220px;
   background: #1A1A1E;
   border: 1px solid rgba(255,255,255,.07);
   transform-style: preserve-3d;
@@ -885,14 +899,26 @@ footer {
   border-color: rgba(124,92,252,.3);
   transform: translateY(-3px);
 }
-.aw-card img { width:100%; height:100%; object-fit:cover; display:block; transition: transform .5s cubic-bezier(0.23,1,.32,1); }
-.aw-card:hover img { transform: scale(1.05); }
+.aw-card .aw-img-wrap {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: auto;
+  transition: transform 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(0);
+  will-change: transform;
+}
+.aw-card:hover .aw-img-wrap {
+  transform: var(--aw-scroll-end, translateY(-45%));
+}
+.aw-card img {
+  width: 100%; height: auto; display: block;
+}
 .aw-card-ph {
-  width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+  width:100%; height:220px; display:flex; align-items:center; justify-content:center;
   font-size:36px; background: rgba(255,255,255,.03);
   transition: transform .5s cubic-bezier(0.23,1,.32,1);
 }
-.aw-card:hover .aw-card-ph { transform: scale(1.05); }
+.aw-card:hover .aw-card-ph { transform: scale(1.04); }
 .aw-over {
   position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(0,0,0,.85) 0%, transparent 55%);
@@ -1435,7 +1461,7 @@ footer {
     <div class="tabpanel on" id="tp-ux">
     <div class="pgrid">
         <div class="pcard r">
-          <img class="pcard-img" src="img_1.jpg" alt="تطبيق استشارة" loading="lazy">
+          <div class="pcard-img-wrap"><img class="pcard-img" src="img_1.jpg" alt="تطبيق استشارة" loading="lazy"></div>
           <div class="pcard-over">
             <div class="pcard-cat">UX/UI · تطبيق طبي</div>
             <div class="pcard-title">تطبيق استشارة</div>
@@ -1443,7 +1469,7 @@ footer {
           <div class="pcard-chip">UX/UI</div>
         </div>
         <div class="pcard r">
-          <img class="pcard-img" src="img_2.jpg" alt="تطبيق مشرف" loading="lazy">
+          <div class="pcard-img-wrap"><img class="pcard-img" src="img_2.jpg" alt="تطبيق مشرف" loading="lazy"></div>
           <div class="pcard-over">
             <div class="pcard-cat">UX/UI · إدارة</div>
             <div class="pcard-title">تطبيق مشرف</div>
@@ -1451,7 +1477,7 @@ footer {
           <div class="pcard-chip">UX/UI</div>
         </div>
         <div class="pcard r">
-          <img class="pcard-img" src="img_3.jpg" alt="الأكاديمية المالية" loading="lazy">
+          <div class="pcard-img-wrap"><img class="pcard-img" src="img_3.jpg" alt="الأكاديمية المالية" loading="lazy"></div>
           <div class="pcard-over">
             <div class="pcard-cat">UX/UI · موقع ويب</div>
             <div class="pcard-title">الأكاديمية المالية</div>
@@ -1459,7 +1485,7 @@ footer {
           <div class="pcard-chip">UX/UI</div>
         </div>
         <div class="pcard r">
-          <img class="pcard-img" src="img_4.jpg" alt="النهدي" loading="lazy">
+          <div class="pcard-img-wrap"><img class="pcard-img" src="img_4.jpg" alt="النهدي" loading="lazy"></div>
           <div class="pcard-over">
             <div class="pcard-cat">UX/UI · تطبيق</div>
             <div class="pcard-title">النهدي</div>
@@ -1467,7 +1493,7 @@ footer {
           <div class="pcard-chip">UX/UI</div>
         </div>
         <div class="pcard r">
-          <img class="pcard-img" src="img_5.jpg" alt="طهر وعفاف" loading="lazy">
+          <div class="pcard-img-wrap"><img class="pcard-img" src="img_5.jpg" alt="طهر وعفاف" loading="lazy"></div>
           <div class="pcard-over">
             <div class="pcard-cat">UX/UI · تطبيق</div>
             <div class="pcard-title">طهر وعفاف</div>
@@ -1475,7 +1501,7 @@ footer {
           <div class="pcard-chip">UX/UI</div>
         </div>
         <div class="pcard r">
-          <img class="pcard-img" src="img_6.jpg" alt="بساطة — UI Design" loading="lazy">
+          <div class="pcard-img-wrap"><img class="pcard-img" src="img_6.jpg" alt="بساطة — UI Design" loading="lazy"></div>
           <div class="pcard-over">
             <div class="pcard-cat">UX/UI · تطبيق طبي</div>
             <div class="pcard-title">بساطة — UI Design</div>
@@ -1483,7 +1509,7 @@ footer {
           <div class="pcard-chip">UX/UI</div>
         </div>
         <div class="pcard r">
-          <img class="pcard-img" src="img_7.jpg" alt="تطبيق حرفي" loading="lazy">
+          <div class="pcard-img-wrap"><img class="pcard-img" src="img_7.jpg" alt="تطبيق حرفي" loading="lazy"></div>
           <div class="pcard-over">
             <div class="pcard-cat">UX/UI · تطبيق</div>
             <div class="pcard-title">تطبيق حرفي</div>
@@ -1491,7 +1517,7 @@ footer {
           <div class="pcard-chip">UX/UI</div>
         </div>
         <div class="pcard r">
-          <img class="pcard-img" src="img_8.jpg" alt="تطبيق بوت" loading="lazy">
+          <div class="pcard-img-wrap"><img class="pcard-img" src="img_8.jpg" alt="تطبيق بوت" loading="lazy"></div>
           <div class="pcard-over">
             <div class="pcard-cat">UX/UI · Chatbot</div>
             <div class="pcard-title">تطبيق بوت</div>
@@ -1499,7 +1525,7 @@ footer {
           <div class="pcard-chip">UX/UI</div>
         </div>
         <div class="pcard r">
-          <img class="pcard-img" src="img_9.jpg" alt="New Source" loading="lazy">
+          <div class="pcard-img-wrap"><img class="pcard-img" src="img_9.jpg" alt="New Source" loading="lazy"></div>
           <div class="pcard-over">
             <div class="pcard-cat">UX/UI · تطبيق مالي</div>
             <div class="pcard-title">New Source</div>
@@ -1507,7 +1533,7 @@ footer {
           <div class="pcard-chip">UX/UI</div>
         </div>
         <div class="pcard r">
-          <img class="pcard-img" src="img_10.jpg" alt="جدارة" loading="lazy">
+          <div class="pcard-img-wrap"><img class="pcard-img" src="img_10.jpg" alt="جدارة" loading="lazy"></div>
           <div class="pcard-over">
             <div class="pcard-cat">UX/UI · تطبيق</div>
             <div class="pcard-title">جدارة</div>
@@ -1515,7 +1541,7 @@ footer {
           <div class="pcard-chip">UX/UI</div>
         </div>
         <div class="pcard r">
-          <img class="pcard-img" src="img_11.jpg" alt="Basata Website" loading="lazy">
+          <div class="pcard-img-wrap"><img class="pcard-img" src="img_11.jpg" alt="Basata Website" loading="lazy"></div>
           <div class="pcard-over">
             <div class="pcard-cat">UX/UI · موقع ويب</div>
             <div class="pcard-title">Basata Website</div>
@@ -1523,7 +1549,7 @@ footer {
           <div class="pcard-chip">UX/UI</div>
         </div>
         <div class="pcard r">
-          <img class="pcard-img" src="img_12.jpg" alt="Visualsoft Website" loading="lazy">
+          <div class="pcard-img-wrap"><img class="pcard-img" src="img_12.jpg" alt="Visualsoft Website" loading="lazy"></div>
           <div class="pcard-over">
             <div class="pcard-cat">UX/UI · موقع ويب</div>
             <div class="pcard-title">Visualsoft Website</div>
@@ -1535,10 +1561,10 @@ footer {
 
     <div class="tabpanel" id="tp-gr">
       <div class="pgrid">
-        <div class="pcard r"><img class="pcard-img" src="img_13.png" alt="عيد مبارك"><div class="pcard-over"><div class="pcard-cat">Social Media · Graphic</div><div class="pcard-title">بوستر عيد مبارك</div></div><div class="pcard-chip">Social Media</div></div>
-        <div class="pcard r"><img class="pcard-img" src="img_14.png" alt="المدارس"><div class="pcard-over"><div class="pcard-cat">Social Media · Graphic</div><div class="pcard-title">حملة العودة للمدارس</div></div><div class="pcard-chip">Campaign</div></div>
-        <div class="pcard r"><img class="pcard-img" src="img_15.png" alt="بوستات"><div class="pcard-over"><div class="pcard-cat">Social Media · Graphic</div><div class="pcard-title">بوستات سوشيال ميديا</div></div><div class="pcard-chip">Social</div></div>
-        <div class="pcard r"><img class="pcard-img" src="img_16.png" alt="packaging"><div class="pcard-over"><div class="pcard-cat">Packaging · Graphic</div><div class="pcard-title">تغليف LOR Dishwashing</div></div><div class="pcard-chip">Packaging</div></div>
+        <div class="pcard r"><div class="pcard-img-wrap"><img class="pcard-img" src="img_13.png" alt="عيد مبارك"></div><div class="pcard-over"><div class="pcard-cat">Social Media · Graphic</div><div class="pcard-title">بوستر عيد مبارك</div></div><div class="pcard-chip">Social Media</div></div>
+        <div class="pcard r"><div class="pcard-img-wrap"><img class="pcard-img" src="img_14.png" alt="المدارس"></div><div class="pcard-over"><div class="pcard-cat">Social Media · Graphic</div><div class="pcard-title">حملة العودة للمدارس</div></div><div class="pcard-chip">Campaign</div></div>
+        <div class="pcard r"><div class="pcard-img-wrap"><img class="pcard-img" src="img_15.png" alt="بوستات"></div><div class="pcard-over"><div class="pcard-cat">Social Media · Graphic</div><div class="pcard-title">بوستات سوشيال ميديا</div></div><div class="pcard-chip">Social</div></div>
+        <div class="pcard r"><div class="pcard-img-wrap"><img class="pcard-img" src="img_16.png" alt="packaging"></div><div class="pcard-over"><div class="pcard-cat">Packaging · Graphic</div><div class="pcard-title">تغليف LOR Dishwashing</div></div><div class="pcard-chip">Packaging</div></div>
         <div class="pcard r"><div class="pcard-placeholder">🎨</div><div class="pcard-over"><div class="pcard-cat">Brand Identity</div><div class="pcard-title">هوية بصرية متكاملة</div></div><div class="pcard-chip">Branding</div></div>
         <div class="pcard r"><div class="pcard-placeholder">🏷️</div><div class="pcard-over"><div class="pcard-cat">Logo Design</div><div class="pcard-title">تصاميم شعارات</div></div><div class="pcard-chip">Logo</div></div>
       </div>
@@ -1631,18 +1657,18 @@ footer {
         <span class="aw-sec-count" id="ux-count"></span>
       </div>
       <div class="aw-inner-grid aw-grid">
-<div class="aw-card" data-cat="ux"><img src="img_1.jpg" alt="تطبيق استشارة" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق طبي</div><div class="aw-title">تطبيق استشارة</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><img src="img_2.jpg" alt="تطبيق مشرف" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · إدارة</div><div class="aw-title">تطبيق مشرف</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><img src="img_3.jpg" alt="الأكاديمية المالية" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · موقع ويب</div><div class="aw-title">الأكاديمية المالية</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><img src="img_4.jpg" alt="النهدي" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق</div><div class="aw-title">النهدي</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><img src="img_5.jpg" alt="طهر وعفاف" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق</div><div class="aw-title">طهر وعفاف</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><img src="img_6.jpg" alt="بساطة — UI Design" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق طبي</div><div class="aw-title">بساطة — UI Design</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><img src="img_7.jpg" alt="تطبيق حرفي" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق</div><div class="aw-title">تطبيق حرفي</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><img src="img_8.jpg" alt="تطبيق بوت" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · Chatbot</div><div class="aw-title">تطبيق بوت</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><img src="img_9.jpg" alt="New Source" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق مالي</div><div class="aw-title">New Source</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><img src="img_10.jpg" alt="جدارة" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق</div><div class="aw-title">جدارة</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><img src="img_11.jpg" alt="Basata Website" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · موقع ويب</div><div class="aw-title">Basata Website</div></div><div class="aw-tag">UX/UI</div></div>
-<div class="aw-card" data-cat="ux"><img src="img_12.jpg" alt="Visualsoft Website" loading="lazy"><div class="aw-over"><div class="aw-cat">UX/UI · موقع ويب</div><div class="aw-title">Visualsoft Website</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><div class="aw-img-wrap"><img src="img_1.jpg" alt="تطبيق استشارة" loading="lazy"></div><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق طبي</div><div class="aw-title">تطبيق استشارة</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><div class="aw-img-wrap"><img src="img_2.jpg" alt="تطبيق مشرف" loading="lazy"></div><div class="aw-over"><div class="aw-cat">UX/UI · إدارة</div><div class="aw-title">تطبيق مشرف</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><div class="aw-img-wrap"><img src="img_3.jpg" alt="الأكاديمية المالية" loading="lazy"></div><div class="aw-over"><div class="aw-cat">UX/UI · موقع ويب</div><div class="aw-title">الأكاديمية المالية</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><div class="aw-img-wrap"><img src="img_4.jpg" alt="النهدي" loading="lazy"></div><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق</div><div class="aw-title">النهدي</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><div class="aw-img-wrap"><img src="img_5.jpg" alt="طهر وعفاف" loading="lazy"></div><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق</div><div class="aw-title">طهر وعفاف</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><div class="aw-img-wrap"><img src="img_6.jpg" alt="بساطة — UI Design" loading="lazy"></div><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق طبي</div><div class="aw-title">بساطة — UI Design</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><div class="aw-img-wrap"><img src="img_7.jpg" alt="تطبيق حرفي" loading="lazy"></div><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق</div><div class="aw-title">تطبيق حرفي</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><div class="aw-img-wrap"><img src="img_8.jpg" alt="تطبيق بوت" loading="lazy"></div><div class="aw-over"><div class="aw-cat">UX/UI · Chatbot</div><div class="aw-title">تطبيق بوت</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><div class="aw-img-wrap"><img src="img_9.jpg" alt="New Source" loading="lazy"></div><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق مالي</div><div class="aw-title">New Source</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><div class="aw-img-wrap"><img src="img_10.jpg" alt="جدارة" loading="lazy"></div><div class="aw-over"><div class="aw-cat">UX/UI · تطبيق</div><div class="aw-title">جدارة</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><div class="aw-img-wrap"><img src="img_11.jpg" alt="Basata Website" loading="lazy"></div><div class="aw-over"><div class="aw-cat">UX/UI · موقع ويب</div><div class="aw-title">Basata Website</div></div><div class="aw-tag">UX/UI</div></div>
+<div class="aw-card" data-cat="ux"><div class="aw-img-wrap"><img src="img_12.jpg" alt="Visualsoft Website" loading="lazy"></div><div class="aw-over"><div class="aw-cat">UX/UI · موقع ويب</div><div class="aw-title">Visualsoft Website</div></div><div class="aw-tag">UX/UI</div></div>
       </div></div><!-- /ux section -->
     <!-- Graphic Section -->
     <div class="aw-section" id="aw-sec-gr" data-sec="gr">
@@ -1926,7 +1952,7 @@ document.querySelectorAll('.tab').forEach(btn=>{
     document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('on'));
     btn.classList.add('on');
     document.getElementById('tp-'+btn.dataset.t).classList.add('on');
-    initTilt();
+    setTimeout(()=>{ initImgScroll(); initTilt(); }, 60);
   });
 });
 
@@ -1936,19 +1962,73 @@ const ro=new IntersectionObserver(entries=>{
 },{threshold:.07});
 document.querySelectorAll('.r').forEach(el=>ro.observe(el));
 
+/* IMAGE SCROLL — show from top, scroll down on hover */
+function initImgScroll(){
+  // pcard scroll
+  document.querySelectorAll('.pcard').forEach(card => {
+    const wrap = card.querySelector('.pcard-img-wrap');
+    if(!wrap) return;
+    const img = wrap.querySelector('.pcard-img');
+    if(!img) return;
+
+    function setScroll(){
+      const cardH = card.offsetHeight;
+      // Wait for image to load to get real height
+      const imgH = img.naturalHeight ? (img.offsetWidth * img.naturalHeight / img.naturalWidth) : img.offsetHeight;
+      if(imgH <= cardH) return; // image shorter than card, no scroll needed
+      const delta = imgH - cardH;
+      wrap.style.setProperty('--end', `-${delta}px`);
+    }
+
+    if(img.complete) setScroll();
+    else img.addEventListener('load', setScroll);
+
+    card.addEventListener('mouseenter', () => {
+      const cardH = card.offsetHeight;
+      const imgH = img.offsetWidth > 0 ? (img.offsetWidth * img.naturalHeight / img.naturalWidth) : 0;
+      if(imgH <= cardH) return;
+      const delta = imgH - cardH;
+      wrap.style.transform = `translateY(-${delta}px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      wrap.style.transform = 'translateY(0)';
+    });
+  });
+
+  // aw-card scroll
+  document.querySelectorAll('.aw-card').forEach(card => {
+    const wrap = card.querySelector('.aw-img-wrap');
+    if(!wrap) return;
+    const img = wrap.querySelector('img');
+    if(!img) return;
+
+    card.addEventListener('mouseenter', () => {
+      const cardH = card.offsetHeight;
+      const imgH = img.offsetWidth > 0 ? (img.offsetWidth * img.naturalHeight / img.naturalWidth) : 0;
+      if(imgH <= cardH) return;
+      const delta = imgH - cardH;
+      wrap.style.transform = `translateY(-${delta}px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      wrap.style.transform = 'translateY(0)';
+    });
+  });
+}
+initImgScroll();
+
 /* 3D TILT */
 function initTilt(){
   document.querySelectorAll('.pcard').forEach(card=>{
     card.onmousemove=e=>{
       const r=card.getBoundingClientRect();
-      const rx=((e.clientY-r.top-r.height/2)/r.height)*-9;
-      const ry=((e.clientX-r.left-r.width/2)/r.width)*9;
-      card.style.transform=`perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.02)`;
-      card.style.transition='transform .08s';
+      const rx=((e.clientY-r.top-r.height/2)/r.height)*-6;
+      const ry=((e.clientX-r.left-r.width/2)/r.width)*6;
+      card.style.transform=`perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.015)`;
+      card.style.transition='transform .1s';
     };
     card.onmouseleave=()=>{
-      card.style.transform='perspective(700px) rotateX(0) rotateY(0) scale(1)';
-      card.style.transition='transform .6s cubic-bezier(0.23,1,.32,1)';
+      card.style.transform='perspective(800px) rotateX(0) rotateY(0) scale(1)';
+      card.style.transition='transform .5s cubic-bezier(0.23,1,.32,1)';
     };
   });
 }
