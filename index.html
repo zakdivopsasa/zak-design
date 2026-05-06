@@ -564,6 +564,11 @@ section { position: relative; z-index: 10; }
   will-change: transform;
   transition: box-shadow .4s cubic-bezier(0.23,1,.32,1), border-color .4s;
 }
+.pcard .pcard-scroll {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
 .pcard:hover {
   box-shadow: 0 24px 64px rgba(124,92,252,.14);
   border-color: rgba(124,92,252,.25);
@@ -574,24 +579,35 @@ section { position: relative; z-index: 10; }
   top: 0; left: 0; right: 0;
   height: auto;
   transform: translateY(0);
-  transition: transform 2.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform;
+}
+.pcard:hover .pcard-img-wrap {
+  transform: translateY(var(--end, 0));
 }
 .pcard-img {
   width: 100%;
   height: auto;
   display: block;
+  object-fit: unset;
+  transform-origin: top center;
+  transition: transform 4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.pcard:hover .pcard-img {
+  transform: translateY(calc(-100% + 280px));
 }
 .pcard-placeholder {
-  width: 100%; height: 280px;
+  width: 100%; height: 280px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
   font-size: 40px; background: rgba(255,255,255,.03);
 }
 
 .pcard-over {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,.85) 0%, transparent 55%);
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.3) 60%, transparent 100%);
   padding: 22px; display: flex; flex-direction: column; justify-content: flex-end;
+  min-height: 80px;
   opacity: 0; transition: opacity .3s;
 }
 .pcard:hover .pcard-over { opacity: 1; }
@@ -886,9 +902,11 @@ footer {
 .aw-inner-grid { margin-top: 0; }
 
 .aw-card {
-  border-radius: 14px; overflow: hidden;
-  position: relative; cursor: pointer;
-  height: 220px;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  height: 200px;
   background: #1A1A1E;
   border: 1px solid rgba(255,255,255,.07);
   transform-style: preserve-3d;
@@ -911,8 +929,17 @@ footer {
   transform: var(--aw-scroll-end, translateY(-45%));
 }
 .aw-card img {
-  width: 100%; height: auto; display: block;
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: unset;
+  transform-origin: top center;
+  transition: transform 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+.aw-card:hover img {
+  transform: translateY(calc(-100% + 200px));
+}
+.aw-card:hover img { transform: scale(1.04); }
 .aw-card-ph {
   width:100%; height:220px; display:flex; align-items:center; justify-content:center;
   font-size:36px; background: rgba(255,255,255,.03);
@@ -949,16 +976,17 @@ footer {
 #lightbox {
   position: fixed; inset: 0; z-index: 9000;
   display: none; flex-direction: column;
-  background: rgba(8,8,12,.96);
+  background: rgba(8,8,12,.97);
   backdrop-filter: blur(24px) saturate(1.2);
   animation: lbIn .35s cubic-bezier(0.23,1,.32,1);
+  overflow: hidden;
 }
 #lightbox.open { display: flex; }
 @keyframes lbIn { from{opacity:0;transform:scale(.97)} to{opacity:1;transform:scale(1)} }
 
 .lb-nav {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 20px 32px;
+  padding: 16px 28px;
   border-bottom: 1px solid rgba(255,255,255,.07);
   flex-shrink: 0;
 }
@@ -979,17 +1007,25 @@ footer {
 .lb-close:hover { background: rgba(255,255,255,.16); transform: rotate(90deg); }
 
 .lb-body {
-  flex: 1; display: flex; align-items: center; justify-content: center;
-  padding: 32px; overflow: auto; position: relative;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+.lb-body::-webkit-scrollbar { width: 4px; }
+.lb-body::-webkit-scrollbar-thumb { background: rgba(124,92,252,.5); border-radius: 4px; }
 .lb-img-wrap {
-  max-width: 900px; width: 100%;
+  max-width: 860px; width: 100%;
   border-radius: 16px; overflow: hidden;
-  box-shadow: 0 32px 80px rgba(0,0,0,.5);
+  box-shadow: 0 24px 64px rgba(0,0,0,.5);
   position: relative;
 }
 .lb-img-wrap img {
-  width: 100%; display: block;
+  width: 100%;
+  display: block;
   border-radius: 16px;
 }
 .lb-placeholder-full {
@@ -1865,6 +1901,9 @@ document.querySelectorAll('a,button,.pcard,.tcard').forEach(el=>{
     lbContent.innerHTML = item.img
       ? `<img src="${item.img}" alt="${item.title}" style="width:100%;display:block;border-radius:16px;">`
       : `<div class="lb-placeholder-full">${item.emoji||'🎨'}</div>`;
+    // Scroll to top of image on each switch
+    const lbBody = document.querySelector('.lb-body');
+    if(lbBody) lbBody.scrollTop = 0;
   }
 
   function openLb(idx){
