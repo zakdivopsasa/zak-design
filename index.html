@@ -557,7 +557,7 @@ section { position: relative; z-index: 10; }
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  height: 280px;
+  height: 260px;
   background: #1A1A1E;
   border: 1px solid rgba(255,255,255,.07);
   transform-style: preserve-3d;
@@ -582,16 +582,15 @@ section { position: relative; z-index: 10; }
   transition: transform 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform;
 }
-.pcard:hover .pcard-img-wrap {
-  transform: translateY(var(--end, 0));
-}
+/* pcard scroll handled by JS */
 .pcard-img {
   width: 100%;
   height: auto;
   display: block;
-  object-fit: unset;
-  transform-origin: top center;
-  transition: transform 4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: absolute;
+  top: 0; left: 0;
+  transform: translateY(0);
+  transition: transform 5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .pcard:hover .pcard-img {
   transform: translateY(calc(-100% + 280px));
@@ -932,12 +931,10 @@ footer {
   width: 100%;
   height: auto;
   display: block;
-  object-fit: unset;
-  transform-origin: top center;
-  transition: transform 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.aw-card:hover img {
-  transform: translateY(calc(-100% + 200px));
+  position: absolute;
+  top: 0; left: 0;
+  transform: translateY(0);
+  transition: transform 4.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .aw-card:hover img { transform: scale(1.04); }
 .aw-card-ph {
@@ -1983,6 +1980,30 @@ function type(){
   setTimeout(type,del?42:80);
 }
 setTimeout(type,800);
+
+/* CARD HOVER SCROLL — image scrolls down on hover revealing full image */
+function initCardHoverScroll(){
+  document.querySelectorAll('.pcard, .aw-card').forEach(card=>{
+    const img = card.querySelector('.pcard-img, img');
+    if(!img) return;
+
+    card.addEventListener('mouseenter', ()=>{
+      const imgH = img.naturalHeight * (card.offsetWidth / img.naturalWidth);
+      const cardH = card.offsetHeight;
+      const travel = Math.max(0, imgH - cardH);
+      if(travel > 0){
+        img.style.transition = `transform ${Math.min(6, 2 + travel/300)}s cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
+        img.style.transform = `translateY(-${travel}px)`;
+      }
+    });
+
+    card.addEventListener('mouseleave', ()=>{
+      img.style.transition = 'transform .6s cubic-bezier(0.23,1,.32,1)';
+      img.style.transform = 'translateY(0)';
+    });
+  });
+}
+initCardHoverScroll();
 
 /* TABS */
 document.querySelectorAll('.tab').forEach(btn=>{
